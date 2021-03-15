@@ -10,7 +10,7 @@ A call to `get_best_tree` with these indepentend variables and the dependent out
 a one-level decision tree for further predictions.
 """
 
-# using OneRule
+using OneRule
 using DataFrames
 
 weather = DataFrame(
@@ -22,4 +22,4 @@ weather = DataFrame(
 
 play = ["no", "no", "yes", "yes", "yes", "no", "yes", "no", "yes", "yes", "yes", "yes", "yes", "no"]
 
-OneRule.get_best_tree(weather, play)
+t = get_best_tree(weather, play)
