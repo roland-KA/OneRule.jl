@@ -1,3 +1,15 @@
+"""
+Example from the book: 
+    Witten, Ian H., Eibe Frank, and Mark A. Hall. 
+    Data Mining Practical Machine Learning Tools and Techniques 
+    Third Edition. Morgan Kaufmann, 2017.
+
+Depending on weather information like outlook, temperature, humidity and windy a game is played (or not).
+
+A call to `get_best_tree` with these indepentend variables and the dependent outcome (`play`) results in 
+a one-level decision tree for further predictions.
+"""
+
 # using OneRule
 using DataFrames
 
