@@ -3,7 +3,7 @@
 Implementation of the *1-Rule* data mining algorithm using the Julia programming language.
 
 The implementation of this algorithm is intended for teaching purposes; it's not for production use. 
-It has been created for a university course in data science at DHBW Karlsruhe (https://www.karlsruhe.dhbw.de/startseite.html)
+It has been created for a university course in data science at [Baden-Württemberg Cooperative State University  Karlsruhe](https://www.karlsruhe.dhbw.de/en/general/about-us.html)
 
 For more information about the algorithm see e.g.: https://datacadamia.com/data_mining/one_rule or have look
 at 
