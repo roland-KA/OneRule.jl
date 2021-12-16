@@ -12,7 +12,8 @@ using DataFrames
 
 export  OneTree,
         OneNode,
-        get_best_tree
+        get_best_tree,
+        get_nodes
 
 include("nodes.jl")
 include("trees.jl")

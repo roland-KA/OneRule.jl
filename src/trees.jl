@@ -25,9 +25,9 @@ Base.:isequal(t1::OneTree, t2::OneTree) = (t1.err_rate == t2.err_rate)
 function all_trees(train_data::AbstractDataFrame, observations::AbstractVector)
     atr_names = names(train_data)       # all attribute names
     uniq_obs = unique(observations)     # possible observations
-    inst_count = size(observations)[1]  # number of instances in `train_data`
+    inst_count = length(observations)   # number of instances in `train_data`
 
-    trees = Vector{OneTree}(undef, size(atr_names)) # for the results
+    trees = Vector{OneTree}(undef, length(atr_names)) # for the results
   
     # make a tree for each attribute
     for i in eachindex(atr_names)
@@ -39,4 +39,12 @@ function all_trees(train_data::AbstractDataFrame, observations::AbstractVector)
         trees[i] = OneTree(atr_names[i], nodes, errsum / inst_count)
     end
     return(trees)
+end
+
+# print a 'OneTree' nicely formatted
+function Base.show(io::IO, ::MIME"text/plain", tree::OneTree) 
+    println(io, "OneTree: $(tree.atr_name)")
+    for n in tree.nodes
+        println(io, "    $(n)")
+    end
 end

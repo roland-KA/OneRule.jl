@@ -8,8 +8,8 @@ end
 
 # make all nodes for attribute `column`
 function get_nodes(column::AbstractVector, observations::AbstractVector, uniq_obs :: AbstractVector)
-    vals = unique(column)                       # possible attribute values
-    nodes = Vector{OneNode}(undef, size(vals))  # for the results
+    vals = unique(column)                         # possible attribute values
+    nodes = Vector{OneNode}(undef, length(vals))  # for the results
     
     freq_table = Dict{String, Dict{String, Int}}()    # Dict of Dicts for counting frequencies
  
@@ -33,3 +33,11 @@ function get_nodes(column::AbstractVector, observations::AbstractVector, uniq_ob
     end
     return(nodes)
 end
+
+# print a 'OneNode' nicely formatted
+function Base.show(io::IO, ::MIME"text/plain", node::OneNode) 
+    print(io, "OneNode: $(node.atr_value) -> $(node.prediction) (Err $(node.err_count), $(node.err_rate))")
+end
+
+# use the same formatting in compact mode
+Base.show(io::IO, node::OneNode) = show(io, "text/plain", node)
