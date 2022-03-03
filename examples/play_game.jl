@@ -23,3 +23,14 @@ weather = DataFrame(
 play = ["no", "no", "yes", "yes", "yes", "no", "yes", "no", "yes", "yes", "yes", "yes", "yes", "no"]
 
 t = get_best_tree(weather, play)
+
+# create some random data for predicting
+N = 10
+newWeather = DataFrames(
+    outlook = rand(["sunny", "overcast", "rainy"], N),
+    temperature = rand(["hot", "mild", "cool"], N),
+    humidity = rand(["high", "normal"], N),
+    windy = rand(["false", "true"], N)
+)
+
+yhat = predict(t, newWeather)
