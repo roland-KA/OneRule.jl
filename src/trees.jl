@@ -2,7 +2,7 @@
 mutable struct OneTree
     feature_name                             # name of the feature for which the tree is created
     nodes         :: AbstractVector{OneNode} # the rules within the decision tree
-    target_lables :: AbstractVector          # possible target labels which may be predicted by this OneTree
+    target_labels :: AbstractVector          # possible target labels which may be predicted by this OneTree
     inst_count    :: Int                     # number of instances (rows)
     err_count     :: Int                     # number of wrongly classified instances (out of `inst_count`)         
 end
@@ -44,7 +44,7 @@ end
 
 # predict classes for new data using a trained `OneTree`
 function predict(ot::OneTree, newX::AbstractDataFrame)
-    preds = Vector{typeof(ot.target_lables[1])}()
+    preds = Vector{typeof(ot.target_labels[1])}()   
     mapping = Dict(ot.nodes[i].feature_value => i for i in eachindex(ot.nodes))
     for fval in newX[: , ot.feature_name]
         push!(preds, ot.nodes[mapping[fval]].prediction)

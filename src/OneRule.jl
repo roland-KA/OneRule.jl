@@ -21,6 +21,7 @@ export  OneTree,
 
 include("nodes.jl")
 include("trees.jl")
+include("OneRule_MLJ.jl")
 
 end # module
 
