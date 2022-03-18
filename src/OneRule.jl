@@ -1,5 +1,5 @@
 """
-Implementation of the 1-Rule-algorithm, 
+Implementation of the 1-Rule-algorithm (by Robert Holte), 
 which finds classification rules from a set of instances based on categorical data.
 
 The result is a one-level deicsion tree (here of type `OneTree`). 
@@ -9,7 +9,7 @@ For more information about the 1-Rule-algorithm see e.g.: https://datacadamia.co
 
 module OneRule
 
-using DataFrames
+import Tables
 
 export  OneTree,
         OneNode,

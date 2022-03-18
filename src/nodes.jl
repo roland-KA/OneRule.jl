@@ -11,8 +11,8 @@ error_rate(n::OneNode) = n.err_count // n.val_count
 
 # make all nodes for feature `column`
 function get_nodes(column::AbstractVector, target::AbstractVector, target_labels :: AbstractVector)
-    fvals = unique(column)      # possible feature values
-    nodes = Vector{OneNode}()   # for the results
+    fvals = unique(column)              # all feature values
+    nodes = Dict{String, OneNode}()     # for the results
  
     # for each feature value we need a Dict of Dicts to count 
     # frequencies of each possible feature value/target label combination
@@ -28,7 +28,7 @@ function get_nodes(column::AbstractVector, target::AbstractVector, target_labels
         maxfreq, cat = findmax(freq_table[f]) # find the most frequent category (and the number of it's occurences)
         sumfreq = sum(values(freq_table[f]))  # number or all occurences of `f``
         errfreq = sumfreq - maxfreq           # wrongly classified occurences of `f``
-        push!(nodes, OneNode(f, cat, sumfreq, errfreq))
+        nodes[f] = OneNode(f, cat, sumfreq, errfreq)
     end
     return(nodes)
 end

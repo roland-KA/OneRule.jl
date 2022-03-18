@@ -8,6 +8,10 @@ Depending on weather information like outlook, temperature, humidity and windy a
 
 A call to `get_best_tree` with these indepentend variables and the dependent outcome (`play`) results in 
 a one-level decision tree for further predictions.
+
+The example shown here uses the models native interface. 
+It can also be used via the MLJ meta-package. For documentation and an example on how to use it with MLJ
+consult the help text of `OneRuleClassifier` (using `?OneRuleClassifier` on the REPL).
 """
 
 using OneRule
