@@ -4,7 +4,7 @@ using Test
 import StatsBase
 import Tables
 using .OneRule
-using MLJ
+using MLJBase
 using CategoricalArrays
 
 ### create test data 
@@ -70,7 +70,7 @@ end
     @info("Testing MLJ interface - start")
     # create/adapt test data
     weather2 = coerce(weather, Textual => Multiclass)
-    play_cat = categorical(play)
+    play_cat = coerce(play, Multiclass)
 
     @info("  MLJ: create model and machine")
     orc = OneRuleClassifier()
@@ -79,7 +79,7 @@ end
     @info("  MLJ: fit & predict")
     fit!(mach)
     yhat = OneRule.predict(t, weather)
-    yhat_cat = MLJ.predict(mach, weather2)
+    yhat_cat = MLJBase.predict(mach, weather2)
     t2 = report(mach).tree
 
     @info("  MLJ: levels of predictions match?")
