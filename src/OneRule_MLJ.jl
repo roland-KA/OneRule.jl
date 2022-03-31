@@ -88,6 +88,8 @@ This classifier has no hyper-parameters.
 
 The fields of `fitted_params(mach)` are:
 - `tree`: the tree (a `OneTree`) returned by the core OneTree.jl algorithm
+- `a_target_element`: for internal use; it's a target element of the training data used to 
+  transfer `levels`-information to `predict`
 
 # Report
 
