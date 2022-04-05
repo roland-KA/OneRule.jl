@@ -101,5 +101,12 @@ end
     @info("  MLJ: compare predictions")
     @test yhat == yhat_cat
 
+    @info("  MLJ: check `report` & `fitted_params`")
+    fp = fitted_params(mach)
+    r = report(mach)
+    @test fp.tree === r.tree
+    @test length(fp.all_classes) ≥ length(r.classes_seen)
+    @test length(r) == 6
+
     @info("Testing MLJ interface - done")
 end;
