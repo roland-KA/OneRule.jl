@@ -11,7 +11,7 @@ end
 
 function MMI.fit(model::OneRuleClassifier, verbosity, X, y)
     tree = get_best_tree(X, y)
-    all_classes = MMI.classes(y[1])                         # used in `predict` to return a prediction with the same levels
+    all_classes = MMI.classes(y[1])                         #   used in `predict` to return a prediction with the same levels
     fitresult = (tree, all_classes)      
     cache = nothing
     report = (                                              # We report ...
@@ -29,7 +29,7 @@ function MMI.predict(model::OneRuleClassifier, fitresult, Xnew)
     return(categorical(yhat, levels = fitresult[2]))        # a CategoricalArray with same levels like the target vector
 end
 
-MMI.fitted_params(::OneRuleClassifier, fitresult) = (tree = fitresult[1], features = fitresult[2])
+MMI.fitted_params(::OneRuleClassifier, fitresult) = (tree = fitresult[1], all_classes = fitresult[2])
 
 MMI.metadata_pkg.(OneRuleClassifier,
       name       = "OneRule",
@@ -88,8 +88,7 @@ This classifier has no hyper-parameters.
 
 The fields of `fitted_params(mach)` are:
 - `tree`: the tree (a `OneTree`) returned by the core OneTree.jl algorithm
-- `a_target_element`: for internal use; it's a target element of the training data used to 
-  transfer `levels`-information to `predict`
+- `all_classes`: all classes (i.e. levels) of the target (used also internally to transfer `levels`-information to `predict`)
 
 # Report
 
@@ -118,7 +117,7 @@ weather_data = (outlook = outlook, temperature = temperature, humidity = humidit
 play_data = ["no", "no", "yes", "yes", "yes", "no", "yes", "no", "yes", "yes", "yes", "yes", "yes", "no"]
 
 weather = coerce(weather_data, Textual => Multiclass)
-play = categorical(play)
+play = coerce(play, Multiclass)
 
 mach = machine(orc, weather, play)
 fit!(mach)
