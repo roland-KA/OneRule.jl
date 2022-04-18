@@ -28,7 +28,7 @@ function get_nodes(column::AbstractVector, target::AbstractVector, target_labels
         maxfreq, cat = findmax(freq_table[f]) # find the most frequent category (and the number of it's occurences)
         sumfreq = sum(values(freq_table[f]))  # number or all occurences of `f``
         errfreq = sumfreq - maxfreq           # wrongly classified occurences of `f``
-        nodes[f] = OneNode(f, cat, sumfreq, errfreq)
+        nodes[string(f)] = OneNode(f, cat, sumfreq, errfreq)
     end
     return(nodes)
 end

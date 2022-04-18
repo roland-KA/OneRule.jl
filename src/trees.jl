@@ -48,7 +48,7 @@ function predict(ot::OneTree, Xnew)
     feature_col = Tables.getcolumn(Tables.columns(Xnew), Symbol(ot.feature_name))   # the column used for predicing
 
     for fval in feature_col
-        push!(preds, ot.nodes[fval].prediction)
+        push!(preds, ot.nodes[string(fval)].prediction)
     end
     return(preds)
 end
