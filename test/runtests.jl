@@ -43,7 +43,7 @@ end
 at = all_trees(weather, play)
 t = get_best_tree(weather, play)
 target_labels = unique(play)
-@info("Test trees created for $(length(weather)) instances and $(length(weather[1])) features")
+@info("Test trees created for $(length(weather)) features and $(length(weather[1])) instances")
 
 @testset "Base" begin
     @test length(at) == length(weather)                         # number of trees ok?
@@ -109,4 +109,25 @@ end
     @test length(r) == 6
 
     @info("Testing MLJ interface - done")
+end
+
+@testset "Different base types" begin 
+    @info("Testing different base types - start")
+    x1 = rand("abc", 20)
+    x2 = rand("def", 20)
+    x3 = rand([:a, :b, :c], 20)
+    y = rand("xy", 20)
+    X = (x1 = x1, x2 = x2, x3 = x3)
+    @info("Test trees created for $(length(X)) features and $(length(X[1])) instances")
+    all = all_trees(X, y)
+    # check all trees
+    @info("Testing each tree - start")
+    for col in 1:length(all)
+        col_name = Tables.columnnames(X)[col]             # column name (as Symbol)
+        @info("    Testing tree: $(all[col].feature_name)")
+        check_oneTree(all[col], Tables.getcolumn(X, col_name), unique(y))
+        yhat = OneRule.predict(all[col], X)
+        @test typeof(yhat[1]) == typeof(y[1])
+    end
+    @info("Testing each tree - done")
 end;
