@@ -1,7 +1,7 @@
 name = "OneRule"
 uuid = "90484964-6d6a-4979-af09-8657dbed84ff"
 authors = ["Roland Schätzle <roland.schaetzle@adviion.de>"]
-version = "0.5.0"
+version = "0.5.1"
 
 [deps]
 CategoricalArrays = "324d7699-5711-5eae-9e2f-1d82baa6b597"
