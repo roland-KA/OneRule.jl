@@ -26,7 +26,7 @@ end
 
 function MMI.predict(model::OneRuleClassifier, fitresult, Xnew)
     yhat = OneRule.predict(fitresult[1], Xnew)
-    return(categorical(yhat, levels = fitresult[2]))        # a CategoricalArray with same levels like the target vector
+    return(categorical(unwrap.(yhat), levels = fitresult[2]))        # a CategoricalArray with same levels like the target vector
 end
 
 MMI.fitted_params(::OneRuleClassifier, fitresult) = (tree = fitresult[1], all_classes = fitresult[2])
@@ -49,22 +49,23 @@ MMI.metadata_model(OneRuleClassifier,
 """
 $(MMI.doc_header(OneRuleClassifier))
 
-`OneRuleClassifier` implements the OneRule method for classification by Robert Holte 
-    (\"Very simple classification rules perform well on most commonly used datasets\" 
-    in: Machine Learning 11.1 (1993), pp. 63-90). 
+`OneRuleClassifier` implements the *OneRule* method for classification by Robert Holte 
+(\"Very simple classification rules perform well on most commonly used datasets\" 
+in: Machine Learning 11.1 (1993), pp. 63-90). 
 
-    For more information see:
-
-    - Witten, Ian H., Eibe Frank, and Mark A. Hall. 
-      Data Mining Practical Machine Learning Tools and Techniques Third Edition. 
-      Morgan Kaufmann, 2017, pp. 93-96.
-    - [Machine Learning - (One|Simple) Rule](https://datacadamia.com/data_mining/one_rule)
-    - [OneRClassifier - One Rule for Classification](http://rasbt.github.io/mlxtend/user_guide/classifier/OneRClassifier/)
+For more information see:
+- Witten, Ian H., Eibe Frank, and Mark A. Hall. 
+  Data Mining Practical Machine Learning Tools and Techniques Third Edition. 
+  Morgan Kaufmann, 2017, pp. 93-96.
+- [Machine Learning - (One|Simple) Rule](https://datacadamia.com/data_mining/one_rule)
+- [OneRClassifier - One Rule for Classification](http://rasbt.github.io/mlxtend/user_guide/classifier/OneRClassifier/)
 
 # Training data
 
 In MLJ or MLJBase, bind an instance `model` to data with
-    mach = machine(model, X, y)
+
+    `mach = machine(model, X, y)``
+
 where
 
 - `X`: any table of input features (eg, a `DataFrame`) whose columns
